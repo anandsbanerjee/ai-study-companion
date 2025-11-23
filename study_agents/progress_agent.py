@@ -246,7 +246,7 @@ def generate_progress_summary(
     topic: str,
     result: WorksheetResult,
     evaluation: WorksheetEvaluation,
-) -> (ProgressProfile, ProgressSummary):
+) -> tuple[ProgressProfile, ProgressSummary]:
     """
     Update the numeric progress profile based on this session and then
     call the progress_agent to generate a narrative ProgressSummary.

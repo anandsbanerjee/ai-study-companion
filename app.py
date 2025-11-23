@@ -14,21 +14,35 @@ from services.study_flow import (
 
 
 # ---------- Setup ----------
-# Prefer Streamlit secrets in deployed env, fallback to local .env for dev
-api_key = os.environ.get("GOOGLE_API_KEY")
-if not api_key:
-    # on Streamlit Cloud, this will be set in the Secrets section
-    if "GOOGLE_API_KEY" in st.secrets:
-        api_key = st.secrets["GOOGLE_API_KEY"]
-        os.environ["GOOGLE_API_KEY"] = api_key
-    else:
-        # local dev fallback if you still use .env
-        from dotenv import load_dotenv
-        load_dotenv()
-        api_key = os.environ.get("GOOGLE_API_KEY")
+def load_api_key():
+    # 1. Local dev / generic: load from .env first
+    load_dotenv()
+    api_key = os.environ.get("GOOGLE_API_KEY")
+    if api_key:
+        return api_key
 
-if not api_key:
-    st.error("GOOGLE_API_KEY is not set. Please configure it in Streamlit secrets or .env.")
+    # 2. Streamlit Cloud: try secrets (or local secrets.toml if you ever add one)
+    try:
+        # Accessing st.secrets can raise if no secrets.toml exists
+        secrets = st.secrets  # this might throw StreamlitSecretNotFoundError
+        if "GOOGLE_API_KEY" in secrets:
+            api_key = secrets["GOOGLE_API_KEY"]
+            os.environ["GOOGLE_API_KEY"] = api_key
+            return api_key
+    except Exception:
+        # No secrets configured (normal for local dev without secrets.toml)
+        pass
+
+    # 3. If still not found, show an error in the UI
+    st.error(
+        "🚨 GOOGLE_API_KEY is not set.\n\n"
+        "Please either:\n"
+        "- Add it to a .env file locally, or\n"
+        "- Configure it in Streamlit Cloud secrets as GOOGLE_API_KEY."
+    )
+    return None
+
+GOOGLE_API_KEY = load_api_key()
 
 # Only for local setup
 # load_dotenv()
@@ -38,11 +52,11 @@ if not api_key:
 #     st.error("GOOGLE_API_KEY not set. Please configure your .env file.")
 #     st.stop()
 
-# st.set_page_config(
-#     page_title="AI Study Companion",
-#     page_icon="🧠",
-#     layout="wide",
-# )
+st.set_page_config(
+     page_title="AI Study Companion",
+     page_icon="🧠",
+     layout="wide",
+)
 
 
 # ---------- Session State Helpers ----------
