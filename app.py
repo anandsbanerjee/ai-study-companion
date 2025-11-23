@@ -14,19 +14,35 @@ from services.study_flow import (
 
 
 # ---------- Setup ----------
-
-load_dotenv()
-
-api_key = os.getenv("GOOGLE_API_KEY")
+# Prefer Streamlit secrets in deployed env, fallback to local .env for dev
+api_key = os.environ.get("GOOGLE_API_KEY")
 if not api_key:
-    st.error("GOOGLE_API_KEY not set. Please configure your .env file.")
-    st.stop()
+    # on Streamlit Cloud, this will be set in the Secrets section
+    if "GOOGLE_API_KEY" in st.secrets:
+        api_key = st.secrets["GOOGLE_API_KEY"]
+        os.environ["GOOGLE_API_KEY"] = api_key
+    else:
+        # local dev fallback if you still use .env
+        from dotenv import load_dotenv
+        load_dotenv()
+        api_key = os.environ.get("GOOGLE_API_KEY")
 
-st.set_page_config(
-    page_title="AI Study Companion",
-    page_icon="🧠",
-    layout="wide",
-)
+if not api_key:
+    st.error("GOOGLE_API_KEY is not set. Please configure it in Streamlit secrets or .env.")
+
+# Only for local setup
+# load_dotenv()
+
+# api_key = os.getenv("GOOGLE_API_KEY")
+# if not api_key:
+#     st.error("GOOGLE_API_KEY not set. Please configure your .env file.")
+#     st.stop()
+
+# st.set_page_config(
+#     page_title="AI Study Companion",
+#     page_icon="🧠",
+#     layout="wide",
+# )
 
 
 # ---------- Session State Helpers ----------
