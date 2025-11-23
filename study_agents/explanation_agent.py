@@ -121,7 +121,7 @@ explanation_agent = LlmAgent(
 x_runner = Runner(
     agent=explanation_agent,
     app_name=APP_NAME,
-    session_service=shared_session_service,  # 🔁 same SessionService as others
+    session_service=shared_session_service,  # same SessionService as created in planner agent
 )
 
 

@@ -18,9 +18,9 @@ def main():
     load_dotenv()
     api_key = os.getenv("GOOGLE_API_KEY")
     if not api_key:
-        raise RuntimeError("GOOGLE_API_KEY is not set. Check your .env file.")
+        raise RuntimeError("GOOGLE_API_KEY is not set. Check env file.")
 
-    print("✅ GOOGLE_API_KEY found. Calling Evaluator + Progress Agent on a dummy worksheet...\n")
+    print("GOOGLE_API_KEY found. Calling Evaluator + Progress Agent on a dummy worksheet...\n")
 
     # 2. Dummy worksheet (same as before)
     q1 = Question(

@@ -151,14 +151,14 @@ MODEL_NAME = "gemini-2.0-flash"
 evaluator_agent = LlmAgent(
     model=MODEL_NAME,
     name="evaluator_agent",
-    description="Evaluates student answers against correct answers and provides scores + feedback.",
+    description="Evaluates student answers against correct answers and provides scores and feedback.",
     instruction=EVALUATOR_INSTRUCTION,
 )
 
 e_runner = Runner(
     agent=evaluator_agent,
     app_name=APP_NAME,
-    session_service=shared_session_service,  # 🔁 same SessionService as Planner & QGen
+    session_service=shared_session_service,  # same SessionService as Planner & QGen
 )
 
 

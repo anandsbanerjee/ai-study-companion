@@ -35,7 +35,7 @@ def load_api_key():
 
     # 3. If still not found, show an error in the UI
     st.error(
-        "🚨 GOOGLE_API_KEY is not set.\n\n"
+        "GOOGLE_API_KEY is not set.\n\n"
         "Please either:\n"
         "- Add it to a .env file locally, or\n"
         "- Configure it in Streamlit Cloud secrets as GOOGLE_API_KEY."

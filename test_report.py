@@ -12,9 +12,9 @@ def main():
     load_dotenv()
     api_key = os.getenv("GOOGLE_API_KEY")
     if not api_key:
-        raise RuntimeError("GOOGLE_API_KEY is not set. Check your .env file.")
+        raise RuntimeError("GOOGLE_API_KEY is not set. Check .env file.")
 
-    print("✅ GOOGLE_API_KEY found. Calling Report Agent on dummy progress data...\n")
+    print("GOOGLE_API_KEY found. Calling Report Agent on dummy progress data...\n")
 
     # 2. Build a dummy numeric ProgressProfile
     fractions_topic = TopicProgress(

@@ -133,7 +133,7 @@ report_agent = LlmAgent(
 r_runner = Runner(
     agent=report_agent,
     app_name=APP_NAME,
-    session_service=shared_session_service,  # 🔁 reuse the same SessionService
+    session_service=shared_session_service,  # reuse the same SessionService
 )
 
 

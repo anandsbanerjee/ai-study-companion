@@ -173,7 +173,7 @@ def get_study_plan(
     if not response_text:
         raise RuntimeError("Planner agent did not return a final response text.")
 
-    # 🔽 Use the robust extractor here
+    # Use the robust extractor here
     try:
         plan_dict = extract_json_from_text(response_text)
     except Exception as e:

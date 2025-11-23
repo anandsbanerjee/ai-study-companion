@@ -13,9 +13,9 @@ def main():
     # Quick check that the API key is visible
     api_key = os.getenv("GOOGLE_API_KEY")
     if not api_key:
-        raise RuntimeError("GOOGLE_API_KEY is not set. Check your .env file.")
+        raise RuntimeError("GOOGLE_API_KEY is not set. Check .env file.")
 
-    print("✅ GOOGLE_API_KEY found. Calling Planner Agent...\n")
+    print("GOOGLE_API_KEY found. Calling Planner Agent...\n")
 
     # 2. Call the planner
     plan = get_study_plan(

@@ -13,9 +13,9 @@ def main():
     load_dotenv()
     api_key = os.getenv("GOOGLE_API_KEY")
     if not api_key:
-        raise RuntimeError("GOOGLE_API_KEY is not set. Check your .env file.")
+        raise RuntimeError("GOOGLE_API_KEY is not set. Check .env file.")
 
-    print("✅ GOOGLE_API_KEY found. Running Planner + Question Generator + Worksheet Loop...\n")
+    print("GOOGLE_API_KEY found. Running Planner + Question Generator + Worksheet Loop...\n")
 
     # 2. Plan session
     plan = get_study_plan(
